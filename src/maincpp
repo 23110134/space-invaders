@@ -1,6 +1,9 @@
+
+
 #include <iostream>
 
-int main (int argc, char const *argv[] )
+int main(int argc, char const *argv[])
 {
-    std::cout <<"space Invaders"
+    std::cout<<"Space invaders"<<std::endl;
+    return 0;
 }
