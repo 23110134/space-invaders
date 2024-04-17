@@ -1,9 +1,32 @@
 
 
-#include <iostream>
+#include<iostream>
+#include<string>
+#include<ftxui/dom/elements.hpp>
+#include<ftxui/screeen/screen.hpp>
+#include<
+
+
+using namespace std;
+using namespace ftxui;
 
 int main(int argc, char const *argv[])
 {
-    std::cout<<"Space invaders"<<std::endl;
+    Element Lienzo = hbox({spinner(21,3) | bold
+    });
+
+    screen pantalla = screen::Create(
+        Dimension::Full(),
+        Dimension::Full(lienzo)
+    );
+
+    Render(pantalla,lienzo);
+    pantalla.Print();
+    pantalla.ResetPosition();
+
+
+
+
+
     return 0;
 }
