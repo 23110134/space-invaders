@@ -2,41 +2,45 @@
 #include <string>
 #include <thread>
 #include <ftxui/dom/elements.hpp>
-#include <ftxui/s
-    int posicionX creen/screen.hpp>
-
+#include <ftxui/screen/screen.hpp>
+#include <Dibujo.hpp>
 
 using namespace std;
 using namespace ftxui;
 
+
 int main(int arg,char const *argv[])
 {   
-    int posicionX = 0;
-    int posicionY = 0;
-    string prueba = "DVD";
+    string Palabra = "DVD";
+
+    int posicionInicialX =0;
+    int posicionInicialY =0;
+
+    auto Pantalla = Screen::Create(Dimension::Full(),Full());
 
     while(true){
 
-    }
-    auto pantalla = Screen::Create(Dimension::Fixed(10),Dimension::Fixed(10));
-    Render(pantalla,border(text("Hola")));
-    pantalla.PixelAt(5,5).character = 'm';
+    this_thread::sleep_for(0.1s);
 
-
+    int posicionPalabraX =0;
+    int posicionPalabraY =0;
     
-    
-    for (auto &&letra : prueba)
+    for (auto &&letra : Palabra )
     {
-        pantalla.PixelAt(posicionX,posicionY).character = letra;
-        posicionX++;
+        int posicionFinalX = posicionInicialX + posicionPalabraX;
+        int posicionFinalY = posicionInicialY + posicionPalabraY;
+        
 
+        Pantalla.PixelAt(posicionFinalX,posicionFinalY).character = letra;
+        posicionPalabraX++;
     }
+
+    Pantalla.Print();
+    Pantalla.Clear();
+    Cout<<Pantalla.ResetPosition();
     
-
-    pantalla.Print();
-    
-
-
+    posicionInicialX++;
+    posicionInicialY++;
 
     return 0;
 }
