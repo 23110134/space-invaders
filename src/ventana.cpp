@@ -4,39 +4,56 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/screen/screen.hpp>
 #include <Dibujo.hpp>
-
+#include <list>
+#include <experimental/random>
 using namespace std;
 using namespace ftxui;
 
 
 int main(int arg,char const *argv[])
 {   
-    string Palabra = "DVD";
+    list<Dibujo> dibujos;
+    dibujos.push back(Dibujo("inicio 0,0"));
 
-    int posicionInicialX =0;
-    int posicionInicialY =0;
+    Dibujo palabra1("Hola",0,0);
+    Dibujo palabra2("ADIOS",5,5);
+
+    for(int i=0; int i<20; i++)
+    {
+        Dibujo palabra("Hola" + to_string(i),
+        0,//posicionX
+        0 //posicionY
+        
+        );
+        dibujos.push back(palabra);
+    }
+
 
     auto Pantalla = Screen::Create(Dimension::Full(),Full());
 
     while(true){
-
+    Pantalla.Clear();
     this_thread::sleep_for(0.1s);
 
-    int posicionPalabraX =0;
-    int posicionPalabraY =0;
-    
-    for (auto &&letra : Palabra )
+    //Actualizar
+    for (auto &&i : dibujos)
     {
-        int posicionFinalX = posicionInicialX + posicionPalabraX;
-        int posicionFinalY = posicionInicialY + posicionPalabraY;
         
-
-        Pantalla.PixelAt(posicionFinalX,posicionFinalY).character = letra;
-        posicionPalabraX++;
+        i.DesplazarX(experimental::randing(-1,1));
+        i.DesplazarY(experimental::randing(-1,1));
+        
     }
-
+    
+    //Dibujar
+    for (auto &&i : dibujos)
+    {
+        i.Dibujar(pantalla);
+    }
+    
+    palabra1.Dibujar(pantalla);
+    paalabra2.Dibujar(pantalla); 
+   
     Pantalla.Print();
-    Pantalla.Clear();
     Cout<<Pantalla.ResetPosition();
     
     posicionInicialX++;
